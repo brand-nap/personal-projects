@@ -1,0 +1,66 @@
+BEGIN TRANSACTION;
+DROP TABLE IF EXISTS users, landmarks, addresses, hotels, routes;
+
+CREATE TABLE users (
+	user_id serial,
+	username varchar(50) NOT NULL,
+	password_hash varchar(200) NOT NULL,
+	role varchar(50) NOT NULL,
+	CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+CREATE TABLE landmarks (
+    id serial PRIMARY KEY,
+    address_id int REFERENCES addresses(id),
+	name varchar,
+    type varchar NOT NULL,
+	description varchar NOT NULL,
+	average_rating int,
+    img_URL varchar NOT NULL
+);
+
+CREATE TABLE addresses (
+    id serial PRIMARY KEY,
+    long_lat varchar,
+    street varchar,
+    city varchar,
+    state varchar,
+    zip int
+);
+
+CREATE TABLE hotels (
+    id serial PRIMARY KEY,
+    address_id int REFERENCES addresses(id),
+    star_rating int NOT NULL,
+    name varchar
+);
+
+CREATE TABLE routes (
+    id serial PRIMARY KEY,
+    user_id int REFERENCES users(id),
+    hotel_id int NOT NULL,
+    created_date date NOT NULL,
+	name varchar,
+	first_id int REFERENCES landmarks(id),
+	second_id int REFERENCES landmarks(id),
+	third_id int REFERENCES landmarks(id),
+	fourth_id int REFERENCES landmarks(id),
+	fifth_id int REFERENCES landmarks(id),
+	sixth_id int REFERENCES landmarks(id),
+	seventh_id int REFERENCES landmarks(id),
+	eigth_id int REFERENCES landmarks(id),
+	ninth_id int REFERENCES landmarks(id),
+	tenth_id int REFERENCES landmarks(id),
+	eleventh_id int REFERENCES landmarks(id),
+	twelfth_id int REFERENCES landmarks(id)
+);
+
+
+
+INSERT INTO public.landmarks (id, name, address_id, type, description, img_URL) VALUES (1, 'City Hall', 1, 'Historical' 'City Hall was the first City Hall to be made by our great city! It halls many of the citys City Hall workers', 'idk');
+
+INSERT INTO public.addresses (id, long_lat, street, city, state, zip) VALUES (1, '150, 150', '1 City St.', 'Real City', 'MA', 00001);
+
+INSERT INTO public.hotels (id, name, address_id, star_rating) VALUES (1, 'Motel Schmotel', 1, 3);
+
+INSERT INTO public.routes (id, user_id, hotel_id, created_date, name, first_id, second_id, third_id, fourth_id, fifth_id, sixth_id, seventh_id, eigth_id, ninth_id, tenth_id, eleventh_id, twelfth_id,  VALUES ();
